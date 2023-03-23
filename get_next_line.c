@@ -9,7 +9,7 @@ char    *get_global_char(char *str, int fd)
     if(buff == NULL)
     return (NULL);
     count = 2;
-    while (count > 0)
+    while (count > 0 && ft_strchr(str, '\n'))
     {
         count = read(fd, buff, BUFFER_SIZE);
         if(count == 0)
@@ -34,6 +34,8 @@ char *get_line_from_glchar(char *str)
 
     i = 0;
     j = 0;
+    if (*str == '\0')
+    return (NULL);
     while (str[i] != '\n')
     i++;
     line = malloc(i + 1);
@@ -58,7 +60,7 @@ char *ft_update(char *str)
     i = 0;
     j = 0;
     len = ft_strlen(str);
-    while (str[i] !=0 && str[i] != '\n')
+    while (str[i] && str[i] != '\n')
     i++;
     new = malloc(len - i + 1);
     if(new == NULL)
@@ -80,9 +82,9 @@ char *get_next_line(int fd)
     if(fd < 0 || BUFFER_SIZE < 0)
     return (NULL);
     if(gl_char == NULL)
-    gl_char = ft_strdup("");
+     gl_char = ft_strdup("");
     gl_char = get_global_char(gl_char, fd);
-    if(!gl_char)
+    if(gl_char == NULL)
     return (NULL);
     retuned_line = get_line_from_glchar(gl_char);
     gl_char = ft_update(gl_char);
