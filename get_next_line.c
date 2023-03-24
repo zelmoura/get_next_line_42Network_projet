@@ -9,7 +9,7 @@ char    *get_global_char(char *str, int fd)
     if(buff == NULL)
     return (NULL);
     count = 2;
-    while (count > 0 && ft_strchr(str, '\n'))
+    while (count > 0 && ft_strchr(str, '\n') == NULL)
     {
         count = read(fd, buff, BUFFER_SIZE);
         if(count == 0)
@@ -36,7 +36,7 @@ char *get_line_from_glchar(char *str)
     j = 0;
     if (*str == '\0')
     return (NULL);
-    while (str[i] != '\n')
+    while (str[i] && str[i] != '\n')
     i++;
     line = malloc(i + 1);
     if(line == NULL)
@@ -62,12 +62,19 @@ char *ft_update(char *str)
     len = ft_strlen(str);
     while (str[i] && str[i] != '\n')
     i++;
+    if (str[i] == '\n')
+    i++;
+    if(str[i] == '\0')
+    {
+        free(str);
+        return (NULL);
+    }
     new = malloc(len - i + 1);
     if(new == NULL)
     return(NULL);
     while (j < len - i)
     {
-        new[j] = str[j + i + 1];
+        new[j] = str[j + i];
         j++;
     }
     free(str);
