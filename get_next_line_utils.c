@@ -13,7 +13,7 @@ size_t	ft_strlen(const char *s)
 	return (l);
 }
 
-char	*ft_strjoin(char const *s1, char const *s2)
+char	*ft_strjoin(char *s1, char const *s2)
 {
 	char		*str_joined;
 	size_t		i;
@@ -36,10 +36,11 @@ char	*ft_strjoin(char const *s1, char const *s2)
 		str_joined[i++] = s2[j++];
 	}
 	str_joined[i] = '\0';
+	free(s1);
 	return ((char *)str_joined);
 }
 
-char	*ft_strdup(const char *s1)
+char	*ft_strdup(char *s1)
 {
 	int		len;
 	char	*s2;
