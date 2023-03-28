@@ -6,7 +6,7 @@
 /*   By: zelmoura <zelmoura@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/27 17:55:02 by zelmoura          #+#    #+#             */
-/*   Updated: 2023/03/27 22:06:00 by zelmoura         ###   ########.fr       */
+/*   Updated: 2023/03/28 01:20:02 by zelmoura         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 # include <unistd.h>
 
 # ifndef BUFFER_SIZE 
-#  define BUFFER_SIZE 1
+#  define BUFFER_SIZE 10
 # endif
 
 

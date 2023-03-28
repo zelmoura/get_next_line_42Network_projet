@@ -20,6 +20,7 @@ char *get_global_char(char *str, int fd)
         if (count == -1)
         {
             free(buff);
+            free(str);
             return (NULL);
         }
         buff[count] = '\0';
@@ -120,7 +121,7 @@ char *get_next_line(int fd)
 // int main()
 // {
 //     char *p;
-//     int fd = open("/Users/zelmoura/francinette/tests/get_next_line/fsoares/multiple_nl.txt", O_RDONLY);
+//     int fd = open("/Users/zelmoura/francinette/tests/get_next_line/fsoares/read_error.txt", O_RDONLY);
 //     while (p)
 //     {
 //         p = get_next_line(fd);
@@ -128,5 +129,6 @@ char *get_next_line(int fd)
 //         free(p);
         
 //     }
+//     while(1);
     
 // }
