@@ -1,71 +1,76 @@
-#include"get_next_line.h"
+#include "get_next_line.h"
 
-size_t	ft_strlen(const char *s)
+size_t	ft_strlen(const char	*s)
 {
-	size_t	l;
+	size_t	i;
 
-	l = 0;
-	while (*s)
-	{
-		l++;
-		s++;
-	}
-	return (l);
-}
-
-char	*ft_strjoin(char *s1, char const *s2)
-{
-	char		*str_joined;
-	size_t		i;
-	size_t		j;
-
-	j = 0;
+	if (!s)
+		return (0);
 	i = 0;
-	if (!s1 || !s2)
-		return (NULL);
-	str_joined = malloc(ft_strlen(s1) + ft_strlen(s2) + 1);
-	if (str_joined == NULL)
-		return (NULL);
-	while (i < ft_strlen(s1))
-	{
-		str_joined[i] = s1[i];
+	while (s[i])
 		i++;
-	}
-	while (i < (ft_strlen(s1) + ft_strlen(s2)) && j < ft_strlen(s2))
-	{
-		str_joined[i++] = s2[j++];
-	}
-	str_joined[i] = '\0';
-	free(s1);
-	return ((char *)str_joined);
-}
-
-char	*ft_strdup(char *s1)
-{
-	int		len;
-	char	*s2;
-
-	len = ft_strlen(s1);
-	s2 = malloc(len + 1);
-	if (s2 == NULL)
-		return (NULL);
-	s2[len] = '\0';
-	while (len--)
-	{
-		s2[len] = s1[len];
-	}
-	return ((char *)s2);
+	return (i);
 }
 
 char	*ft_strchr(const char *s, int c)
 {
-	while (*s)
-	{
-		if (*s == (char)c)
-			return ((char *)s);
-		s++;
-	}
-	if ((char )c == '\0')
-		return ((char *)s);
+	char	*str;
+
+	if (!s)
+		return (NULL);
+	str = (char *)s;
+	while (*str != (char)c && *str)
+		str++;
+	if (*str == (char)c)
+		return (str);
 	return (0);
+}
+
+char	*ft_strdup(char *s1)
+{
+	int		i;
+	int		len;
+	char	*str;
+
+	i = 0;
+	len = ft_strlen(s1);
+	str = malloc(sizeof(char) * (len + 1));
+	if (!str)
+		return (NULL);
+	while (s1[i])
+	{
+		str[i] = s1[i];
+		i++;
+	}
+	str[i] = '\0';
+	return (str);
+}
+
+char	*ft_strjoin(char *s1, char const *s2)
+{
+	char	*str;
+	size_t	len;
+	size_t	i;
+	size_t	j;
+
+	if (!s1)
+		s1 = ft_strdup("");
+	if (!s1)
+		return (NULL);
+	len = ft_strlen(s1) + ft_strlen(s2);
+	str = malloc(sizeof(char) * len + 1);
+	if (!str)
+		return (NULL);
+	i = 0;
+	while (s1[i])
+	{
+		str[i] = s1[i];
+		i++;
+	}
+	j = 0;
+	while (s2[j])
+		str[i++] = s2[j++];
+	str[i] = 0;
+	free(s1);
+	return (str);
 }

@@ -1,6 +1,8 @@
 #include "get_next_line.h"
 #include <stdio.h>
 
+
+
 char *get_global_char(char *str, int fd)
 {
     char *buff;
@@ -20,7 +22,7 @@ char *get_global_char(char *str, int fd)
             free(buff);
             return (NULL);
         }
-        buff[BUFFER_SIZE + 1] = '\0';
+        buff[count] = '\0';
         str = ft_strjoin(str, buff);
     }
     free(buff);
@@ -44,7 +46,7 @@ char *get_line_from_glchar(char *str)
     line = malloc(i + 1);
     if (line == NULL)
         return (NULL);
-    while (j < i && str[j] != '\0')
+    while (j < i)
     {
         line[j] = str[j];
         j++;
@@ -91,38 +93,40 @@ char *get_next_line(int fd)
 
     if (fd < 0 || BUFFER_SIZE < 0)
         return (NULL);
-    if (gl_char == NULL)
-        gl_char = ft_strdup("");
     gl_char = get_global_char(gl_char, fd);
     if (gl_char == NULL)
-        return (NULL);
+        return (free(gl_char), NULL);
     retuned_line = get_line_from_glchar(gl_char);
     gl_char = ft_update(gl_char);
     return (retuned_line);
 }
 
-#include <stdio.h>
+// #include <stdio.h>
 
-void    s(void)
-{
-    int fd;
-    fd = open("get_next_line.h", O_RDONLY);
+// void    s(void)
+// {çç
 
-    get_next_line(fd);
-    // while (p)
-    // {
-    //     get_next_line()
-    //     free(p);
-    //     p = get_next_line(fd);
-    // }
-    close(fd);
+//     get_next_line(fd);
+//     // while (p)
+//     // {
+//     //     get_next_line()
+//     //     free(p);
+//     //     p = get_next_line(fd);
+//     // }
+//     close(fd);
   
-}
-int main()
-{
-    {
-        s();
-    }
-    while(1);
-    return (0);
-}
+// }
+// #include<stdio.h>
+// int main()
+// {
+//     char *p;
+//     int fd = open("/Users/zelmoura/francinette/tests/get_next_line/fsoares/multiple_nl.txt", O_RDONLY);
+//     while (p)
+//     {
+//         p = get_next_line(fd);
+//         printf("%s", p);
+//         free(p);
+        
+//     }
+    
+// }
